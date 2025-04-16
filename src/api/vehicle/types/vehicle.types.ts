@@ -56,6 +56,7 @@ interface Vehicle extends Document {
   notes?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  isDeleted: boolean;
 
   // Virtual
   age?: number;
@@ -91,6 +92,53 @@ interface VehicleResponse {
   age?: number;
 }
 
+interface VehicleCreatePayload {
+  registrationNumber: string;
+  vin: string;
+  make: string;
+  vehicleModel: string;
+  year: number;
+  type: VehicleType;
+  color?: string;
+  fuelType: FuelType;
+  engineCapacityCC?: number;
+  transmission?: TransmissionType;
+  status: VehicleStatus;
+  purchaseDate?: Date;
+  purchasePrice?: number;
+  insurance?: Insurance;
+  gpsDeviceId?: string;
+  currentLocation?: GeoPoint;
+  notes?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+
+  // Virtual
+  age?: number;
+}
+interface VehicleUpdatePayload {
+  registrationNumber?: string;
+  vin?: string;
+  make?: string;
+  vehicleModel?: string;
+  year?: number;
+  type?: VehicleType;
+  color?: string;
+  fuelType?: FuelType;
+  engineCapacityCC?: number;
+  transmission?: TransmissionType;
+  status?: VehicleStatus;
+  purchaseDate?: Date;
+  purchasePrice?: number;
+  insurance?: Insurance;
+  gpsDeviceId?: string;
+  currentLocation?: GeoPoint;
+  notes?: string;
+
+  // Virtual
+  age?: number;
+}
+
 type VehicleModelCollection = {} & mongoose.Model<Vehicle> &
   PaginateModel<Vehicle>;
 
@@ -104,4 +152,6 @@ export {
   GeoPoint,
   Insurance,
   VehicleResponse,
+  VehicleCreatePayload,
+  VehicleUpdatePayload,
 };

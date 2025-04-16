@@ -17,10 +17,10 @@ type CrudServiceParams<T> = {
 };
 
 export class CrudService<T extends Document> {
-  private readonly redisCacheService: RedisCacheService;
-  private readonly moduleName: string;
-  private readonly getReturnValues: (document: T) => any;
-  private readonly model: Model<T> & PaginateModel<T>;
+  protected readonly redisCacheService: RedisCacheService;
+  protected readonly moduleName: string;
+  protected readonly getReturnValues: (document: T) => any;
+  protected readonly model: Model<T> & PaginateModel<T>;
 
   constructor(params: CrudServiceParams<T>) {
     this.model = params.model;
@@ -80,12 +80,9 @@ export class CrudService<T extends Document> {
     return this.getReturnValues(document);
   }
 
+  // using hard delete for demo purposes
   async delete(id: string): Promise<T> {
-    const document = await this.model.findByIdAndUpdate(
-      id,
-      { isDeleted: true, deletedAt: new Date() },
-      { new: true }
-    );
+    const document = await this.model.findByIdAndDelete(id);
     if (!document) {
       throw new ApiError("Record not found", StatusCodes.NOT_FOUND);
     }

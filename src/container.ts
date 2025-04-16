@@ -4,15 +4,17 @@ import DB from "./common/services/database.service";
 import ExceptionHandlerService from "./common/services/exception-handler.service";
 import ValidationService from "./common/services/validation.service";
 import ApiResponseHandler from "./common/services/api-response.service";
-
+import VehicleService from "./api/vehicle/services/vehicle.service";
 import RedisCacheService from "./common/services/redis-cache.service";
-
+import { VehicleModel } from "./api/vehicle/models/vehicle.model";
 const createDatabase = async (dbConnString: string) => {
   const database = new DB(dbConnString);
   await database.connectDatabase();
   const db = {
     database,
-    model: {},
+    model: {
+      vehicle: VehicleModel,
+    },
   };
   return db;
 };
@@ -31,6 +33,10 @@ const createContainer = async () => {
   });
   const validationService = new ValidationService();
   const apiResponseService = new ApiResponseHandler();
+  const vehicleService = new VehicleService(
+    db.model.vehicle,
+    redisCacheService
+  );
 
   return {
     config,
@@ -39,6 +45,7 @@ const createContainer = async () => {
     apiResponseService,
     db,
     redisCacheService,
+    vehicleService,
   };
 };
 

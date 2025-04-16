@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Vehicle, VehicleModelCollection } from "../types/vehicle.types";
+import { boolean } from "zod";
 
 const vehicleSchema = new Schema(
   {
@@ -22,7 +23,7 @@ const vehicleSchema = new Schema(
       required: true,
       trim: true,
     },
-    model: {
+    vehicleModel: {
       type: String,
       required: true,
       trim: true,
@@ -108,6 +109,10 @@ const vehicleSchema = new Schema(
     },
     notes: {
       type: String,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {
