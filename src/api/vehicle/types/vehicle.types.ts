@@ -1,6 +1,7 @@
 import type { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 import type { PaginateModel, Document } from "mongoose";
+import { Maintenance } from "../../maintenance/types/maintenance.types";
 
 type VehicleType =
   | "sedan"
@@ -50,7 +51,7 @@ interface Vehicle extends Document {
   purchasePrice?: number;
   lastMaintenanceDate?: Date;
   nextMaintenanceDate?: Date;
-  maintenanceHistory?: string[]; // Array of IDs referencing Maintenance
+  maintenanceHistory?: Maintenance[] | string[]; // Array of IDs referencing Maintenance
   insurance?: Insurance;
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;
@@ -85,6 +86,7 @@ interface VehicleResponse {
   purchasePrice?: number;
   lastMaintenanceDate?: Date;
   nextMaintenanceDate?: Date;
+  maintenanceHistory?: Maintenance[];
   insurance?: Insurance;
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;

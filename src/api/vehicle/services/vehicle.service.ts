@@ -5,6 +5,7 @@ import type {
 } from "../types/vehicle.types";
 import { CrudService } from "../../../common/services/crud.service";
 import type RedisCacheService from "../../../common/services/redis-cache.service";
+import { Maintenance } from "../../maintenance/types/maintenance.types";
 
 class VehicleService extends CrudService<Vehicle> {
   constructor(
@@ -48,6 +49,7 @@ class VehicleService extends CrudService<Vehicle> {
       age: document.age,
       speedKm: document.speedKm,
       isIgnitionOn: document.isIgnitionOn,
+      maintenanceHistory: document.maintenanceHistory as Maintenance[],
     };
   }
 }

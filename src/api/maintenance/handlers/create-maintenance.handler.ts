@@ -28,17 +28,31 @@ const MaintenanceCreatePayloadSchema = z.object({
 const createCreateMaintenanceHandler =
   (container: Container): RequestHandler =>
   async (req, res, next) => {
-    const { validationService, apiResponseService, maintenanceService } =
-      container;
+    const {
+      validationService,
+      apiResponseService,
+      maintenanceService,
+      vehicleService,
+    } = container;
     try {
       const payload: MaintenanceCreatePayload = validationService.validateData(
         MaintenanceCreatePayloadSchema,
         req.body
       );
 
+      // Create the maintenance record
       const data = await maintenanceService.create({
         ...payload,
         vehicleId: new mongoose.Types.ObjectId(payload.vehicleId),
+      });
+
+      // Update the vehicle's maintenanceHistory array to include this maintenance record
+      const vehicleId = payload.vehicleId;
+      const vehicle = await vehicleService.getById(vehicleId);
+
+      // Update the vehicle with the new maintenance record
+      await vehicleService.update(vehicleId, {
+        maintenanceHistory: [...(vehicle.maintenanceHistory || []), data.id],
       });
 
       // Send the response

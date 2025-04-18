@@ -36,11 +36,18 @@ export class CrudService<T extends Document> {
     return this.getReturnValues(createdDocument);
   }
 
-  async getById(id: string): Promise<T> {
-    const document = (await this.model.findById(id).lean()) as T;
+  async getById(id: string, populate?: string | string[]): Promise<T> {
+    let query = this.model.findById(id).lean();
+
+    if (populate) {
+      query = query.populate(populate);
+    }
+
+    const document = (await query) as T;
     if (!document) {
       throw new ApiError("Record not found", StatusCodes.NOT_FOUND);
     }
+
     return this.getReturnValues(document);
   }
 

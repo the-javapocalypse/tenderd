@@ -8,7 +8,7 @@ const createGetVehicleHandler =
     const { vehicleService, validationService, apiResponseService } = container;
     try {
       const { id } = validationService.validateIdParam(req.params);
-      const data = await vehicleService.getById(id);
+      const data = await vehicleService.getById(id, "maintenanceHistory");
       apiResponseService.sendJsonResponse(res, {
         data,
         statusCode: StatusCodes.OK,
