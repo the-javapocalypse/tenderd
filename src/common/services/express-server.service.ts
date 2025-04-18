@@ -59,6 +59,9 @@ export class ExpressServer {
     // Initialize Socket.IO service
     const socketService = new SocketService(server, this.container);
 
+    // Add socketService to container for use throughout the application
+    this.container.socketService = socketService;
+
     return app;
   }
 }

@@ -110,9 +110,13 @@ const vehicleSchema = new Schema(
     notes: {
       type: String,
     },
-    speed: {
+    speedKm: {
       type: Number,
       default: 0,
+    },
+    isIgnitionOn: {
+      type: Boolean,
+      default: false,
     },
     isDeleted: {
       type: Boolean,

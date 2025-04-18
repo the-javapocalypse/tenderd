@@ -33,6 +33,7 @@ interface Insurance {
 interface Vehicle extends Document {
   _id: ObjectId;
   registrationNumber: string;
+  isIgnitionOn: boolean;
   vin: string;
   make: string;
   vehicleModel: string;
@@ -54,18 +55,20 @@ interface Vehicle extends Document {
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;
   notes?: string;
-  speed: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  speedKm: number;
+  createdAt: Date;
+  updatedAt: Date;
   isDeleted: boolean;
 
   // Virtual
   age?: number;
 }
 
+// Response interface
 interface VehicleResponse {
-  id?: ObjectId;
+  id: ObjectId;
   registrationNumber: string;
+  isIgnitionOn: boolean;
   vin: string;
   make: string;
   vehicleModel: string;
@@ -86,11 +89,9 @@ interface VehicleResponse {
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;
   notes?: string;
-  speed: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-
-  // Virtual
+  speedKm: number;
+  createdAt: Date;
+  updatedAt: Date;
   age?: number;
 }
 
@@ -110,13 +111,7 @@ interface VehicleCreatePayload {
   purchasePrice?: number;
   insurance?: Insurance;
   gpsDeviceId?: string;
-  currentLocation?: GeoPoint;
   notes?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-
-  // Virtual
-  age?: number;
 }
 interface VehicleUpdatePayload {
   registrationNumber?: string;
@@ -134,11 +129,7 @@ interface VehicleUpdatePayload {
   purchasePrice?: number;
   insurance?: Insurance;
   gpsDeviceId?: string;
-  currentLocation?: GeoPoint;
   notes?: string;
-
-  // Virtual
-  age?: number;
 }
 
 type VehicleModelCollection = {} & mongoose.Model<Vehicle> &

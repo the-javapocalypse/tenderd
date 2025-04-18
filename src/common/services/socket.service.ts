@@ -1,6 +1,7 @@
 import { Server as HttpServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import type { Container } from "../../container";
+import type { ObjectId } from "mongodb";
 
 // todo: add socket to container
 export class SocketService {
@@ -32,31 +33,123 @@ export class SocketService {
 
   private handleConnectionEvents(socket: any) {
     // Handle client join event
-    socket.on("join", (data: { room: string }) => {
-      socket.join(data.room);
-      console.log(`Client ${socket.id} joined room: ${data.room}`);
+    socket.on("join", (data: { room: string; type: "sensor" | "client" }) => {
+      const { room, type } = data;
+      const roomId = type === "sensor" ? `${room}-sensor` : `${room}-client`;
+
+      socket.join(roomId);
+      console.log(`${type} ${socket.id} joined room: ${roomId}`);
+
+      // If this is a sensor connecting, set isIgnitionOn to true
+      if (type === "sensor") {
+        this.handleSensorConnection(room);
+      }
 
       // Notify room of new connection
-      this.io?.to(data.room).emit("user_joined", {
+      this.io?.to(roomId).emit("user_joined", {
         userId: socket.id,
-        room: data.room,
+        room: roomId,
+        type,
       });
     });
 
     // Handle client leave event
-    socket.on("leave", (data: { room: string }) => {
-      socket.leave(data.room);
-      console.log(`Client ${socket.id} left room: ${data.room}`);
+    socket.on("leave", (data: { room: string; type: "sensor" | "client" }) => {
+      const { room, type } = data;
+      const roomId = type === "sensor" ? `${room}-sensor` : `${room}-client`;
+
+      socket.leave(roomId);
+      console.log(`${type} ${socket.id} left room: ${roomId}`);
+
+      // If this is a sensor disconnecting, set isIgnitionOn to false
+      if (type === "sensor") {
+        this.handleSensorDisconnection(room);
+      }
 
       // Notify room of client leaving
-      this.io?.to(data.room).emit("user_left", {
+      this.io?.to(roomId).emit("user_left", {
         userId: socket.id,
-        room: data.room,
+        room: roomId,
+        type,
       });
     });
   }
 
-  private handleVehicleEvents(socket: any) {}
+  private async handleSensorConnection(vehicleId: string) {
+    try {
+      // Set isIgnitionOn to true when sensor connects
+      const vehicleService = this.container.vehicleService;
+      await vehicleService.update(vehicleId, { isIgnitionOn: true });
+
+      // Broadcast ignition status to clients
+      this.io.to(`${vehicleId}-client`).emit("vehicleIgnitionUpdated", {
+        vehicleId,
+        isIgnitionOn: true,
+        timestamp: new Date(),
+      });
+
+      console.log(`Vehicle ${vehicleId} ignition set to ON`);
+    } catch (error) {
+      console.error("Error updating vehicle ignition status:", error);
+    }
+  }
+
+  private async handleSensorDisconnection(vehicleId: string) {
+    try {
+      // Set isIgnitionOn to false when sensor disconnects
+      const vehicleService = this.container.vehicleService;
+      await vehicleService.update(vehicleId, { isIgnitionOn: false });
+
+      // Broadcast ignition status to clients
+      this.io.to(`${vehicleId}-client`).emit("vehicleIgnitionUpdated", {
+        vehicleId,
+        isIgnitionOn: false,
+        timestamp: new Date(),
+      });
+
+      console.log(`Vehicle ${vehicleId} ignition set to OFF`);
+    } catch (error) {
+      console.error("Error updating vehicle ignition status:", error);
+    }
+  }
+
+  private handleVehicleEvents(socket: any) {
+    socket.on(
+      "reportVehicleTelemetry",
+      async (data: { vehicleId: string | ObjectId; speedKm: number }) => {
+        try {
+          const { vehicleId, speedKm } = data;
+
+          if (!vehicleId || typeof speedKm !== "number") {
+            console.error("Invalid telemetry data", data);
+            return;
+          }
+
+          console.log(
+            `Received telemetry update for vehicle ${vehicleId}: speed (km/h)=${speedKm}`
+          );
+
+          // Update vehicle speed in database
+          const vehicleService = this.container.vehicleService;
+          await vehicleService.update(vehicleId.toString(), { speedKm });
+
+          // Get current ignition status
+          const vehicle = await vehicleService.getById(vehicleId.toString());
+          const isIgnitionOn = vehicle?.isIgnitionOn || false;
+
+          // Broadcast the updated telemetry to clients in the vehicle client room
+          this.io.to(`${vehicleId}-client`).emit("vehicleTelemetryUpdated", {
+            vehicleId,
+            speedKm,
+            isIgnitionOn,
+            timestamp: new Date(),
+          });
+        } catch (error) {
+          console.error("Error updating vehicle telemetry:", error);
+        }
+      }
+    );
+  }
 
   public getIO(): SocketServer {
     return this.io;

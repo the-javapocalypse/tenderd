@@ -7,6 +7,8 @@ import ApiResponseHandler from "./common/services/api-response.service";
 import VehicleService from "./api/vehicle/services/vehicle.service";
 import RedisCacheService from "./common/services/redis-cache.service";
 import { VehicleModel } from "./api/vehicle/models/vehicle.model";
+import { SocketService } from "./common/services/socket.service";
+
 const createDatabase = async (dbConnString: string) => {
   const database = new DB(dbConnString);
   await database.connectDatabase();
@@ -49,6 +51,9 @@ const createContainer = async () => {
   };
 };
 
-export type Container = Awaited<ReturnType<typeof createContainer>>;
+// Extends the Container type to include socketService which will be added later
+export type Container = Awaited<ReturnType<typeof createContainer>> & {
+  socketService?: SocketService;
+};
 
 export default createContainer;
