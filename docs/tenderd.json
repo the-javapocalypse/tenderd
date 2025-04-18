@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "13771cad-15cf-424a-a824-573f474dcc03",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34641644",
+		"_collection_link": "https://ombori.postman.co/workspace/Team-Workspace~db699b81-8246-4a0e-8c52-e1ce034496d1/collection/5725161-13771cad-15cf-424a-a824-573f474dcc03?action=share&source=collection_link&creator=34641644"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/vehicle",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicle"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/vehicle",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicle"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1727"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6bf-pg6KSv3LPOh7tINFvRZgKUPheTg\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Apr 2025 17:00:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"docs\": [\n            {\n                \"id\": \"67ffcfd150f65011cb32a3e4\",\n                \"registrationNumber\": \"ABC123\",\n                \"vin\": \"1HGCM82633A123456\",\n                \"make\": \"Honda\",\n                \"vehicleModel\": \"Accord\",\n                \"year\": 2023,\n                \"type\": \"sedan\",\n                \"color\": \"Silver\",\n                \"fuelType\": \"petrol\",\n                \"engineCapacityCC\": 2000,\n                \"transmission\": \"automatic\",\n                \"status\": \"active\",\n                \"currentOdometerKm\": 0,\n                \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n                \"purchasePrice\": 25000,\n                \"insurance\": {\n                    \"provider\": \"AllState\",\n                    \"policyNumber\": \"POL123456\",\n                    \"coverageType\": \"comprehensive\",\n                    \"startDate\": \"2023-01-15T00:00:00.000Z\",\n                    \"endDate\": \"2024-01-15T00:00:00.000Z\",\n                    \"premium\": 1200\n                },\n                \"gpsDeviceId\": \"GPS123456\",\n                \"currentLocation\": {\n                    \"type\": \"Point\",\n                    \"coordinates\": [\n                        -73.935242,\n                        40.73061\n                    ]\n                },\n                \"notes\": \"Company vehicle for sales team\",\n                \"createdAt\": \"2025-04-16T15:42:09.150Z\",\n                \"updatedAt\": \"2025-04-18T16:29:52.675Z\",\n                \"speedKm\": 4,\n                \"isIgnitionOn\": false\n            },\n            {\n                \"id\": \"6801183c3729d7a616558e61\",\n                \"registrationNumber\": \"687\",\n                \"vin\": \"Irure quia repudiand\",\n                \"make\": \"Mollitia voluptate q\",\n                \"vehicleModel\": \"Ea consectetur excep\",\n                \"year\": 1993,\n                \"type\": \"sedan\",\n                \"color\": \"Atque qui voluptatem\",\n                \"fuelType\": \"petrol\",\n                \"engineCapacityCC\": 1600,\n                \"transmission\": \"automatic\",\n                \"status\": \"active\",\n                \"currentOdometerKm\": 0,\n                \"purchaseDate\": \"2025-04-16T20:00:00.000Z\",\n                \"purchasePrice\": 842,\n                \"insurance\": {\n                    \"provider\": \"Perferendis porro as\",\n                    \"policyNumber\": \"835\",\n                    \"coverageType\": \"Non rerum voluptatem\",\n                    \"startDate\": \"2025-03-31T20:00:00.000Z\",\n                    \"endDate\": \"2025-04-15T20:00:00.000Z\",\n                    \"premium\": 100\n                },\n                \"gpsDeviceId\": \"Quia velit enim sequ\",\n                \"currentLocation\": {\n                    \"type\": \"Point\",\n                    \"coordinates\": [\n                        0,\n                        0\n                    ]\n                },\n                \"notes\": \"Veritatis ea laborum\",\n                \"createdAt\": \"2025-04-17T15:03:24.980Z\",\n                \"updatedAt\": \"2025-04-17T15:03:24.980Z\"\n            }\n        ],\n        \"totalDocs\": 2,\n        \"limit\": 10,\n        \"totalPages\": 1,\n        \"page\": 1,\n        \"pagingCounter\": 1,\n        \"hasPrevPage\": false,\n        \"hasNextPage\": false,\n        \"prevPage\": null,\n        \"nextPage\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"registrationNumber\": \"ABBC123\",\n  \"vin\": \"1HGCM82633A12asd3456\",\n  \"make\": \"Honda\",\n  \"vehicleModel\": \"Accord\",\n  \"year\": 2023,\n  \"type\": \"sedan\",\n  \"color\": \"Silver\",\n  \"fuelType\": \"petrol\",\n  \"engineCapacityCC\": 2000,\n  \"transmission\": \"automatic\",\n  \"status\": \"active\",\n  \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n  \"purchasePrice\": 25000,\n  \"insurance\": {\n    \"provider\": \"AllState\",\n    \"policyNumber\": \"POL123456\",\n    \"coverageType\": \"comprehensive\",\n    \"startDate\": \"2023-01-15T00:00:00.000Z\",\n    \"endDate\": \"2024-01-15T00:00:00.000Z\",\n    \"premium\": 1200\n  },\n  \"gpsDeviceId\": \"GPS123456\",\n  \"currentLocation\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.935242, 40.730610]\n  },\n  \"notes\": \"Company vehicle for sales team\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/vehicle",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicle"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"registrationNumber\": \"ABBC123\",\n  \"vin\": \"1HGCM82633A12asd3456\",\n  \"make\": \"Honda\",\n  \"vehicleModel\": \"Accord\",\n  \"year\": 2023,\n  \"type\": \"sedan\",\n  \"color\": \"Silver\",\n  \"fuelType\": \"petrol\",\n  \"engineCapacityCC\": 2000,\n  \"transmission\": \"automatic\",\n  \"status\": \"active\",\n  \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n  \"purchasePrice\": 25000,\n  \"insurance\": {\n    \"provider\": \"AllState\",\n    \"policyNumber\": \"POL123456\",\n    \"coverageType\": \"comprehensive\",\n    \"startDate\": \"2023-01-15T00:00:00.000Z\",\n    \"endDate\": \"2024-01-15T00:00:00.000Z\",\n    \"premium\": 1200\n  },\n  \"gpsDeviceId\": \"GPS123456\",\n  \"currentLocation\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.935242, 40.730610]\n  },\n  \"notes\": \"Company vehicle for sales team\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/vehicle",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicle"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "826"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33a-uPYCDJQFLpkG82R7JnR2lSQLHBc\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Apr 2025 18:18:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"6802976900a93bfc18b625fe\",\n        \"registrationNumber\": \"ABBC123\",\n        \"vin\": \"1HGCM82633A12asd3456\",\n        \"make\": \"Honda\",\n        \"vehicleModel\": \"Accord\",\n        \"year\": 2023,\n        \"type\": \"sedan\",\n        \"color\": \"Silver\",\n        \"fuelType\": \"petrol\",\n        \"engineCapacityCC\": 2000,\n        \"transmission\": \"automatic\",\n        \"status\": \"active\",\n        \"currentOdometerKm\": 0,\n        \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n        \"purchasePrice\": 25000,\n        \"insurance\": {\n            \"provider\": \"AllState\",\n            \"policyNumber\": \"POL123456\",\n            \"coverageType\": \"comprehensive\",\n            \"startDate\": \"2023-01-15T00:00:00.000Z\",\n            \"endDate\": \"2024-01-15T00:00:00.000Z\",\n            \"premium\": 1200\n        },\n        \"gpsDeviceId\": \"GPS123456\",\n        \"currentLocation\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n                -73.935242,\n                40.73061\n            ]\n        },\n        \"notes\": \"Company vehicle for sales team\",\n        \"createdAt\": \"2025-04-18T18:18:17.559Z\",\n        \"updatedAt\": \"2025-04-18T18:18:17.559Z\",\n        \"age\": 2,\n        \"speedKm\": 0,\n        \"isIgnitionOn\": false,\n        \"maintenanceHistory\": []\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/vehicle/67ffcfd150f65011cb32a3e4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"67ffcfd150f65011cb32a3e4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/vehicle/67ffcfd150f65011cb32a3e4",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicle",
+								"67ffcfd150f65011cb32a3e4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1189"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a5-ifTFySMRH0+Wm2bRvGDiorsWF9c\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Apr 2025 17:11:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"67ffcfd150f65011cb32a3e4\",\n        \"registrationNumber\": \"ABC123\",\n        \"vin\": \"1HGCM82633A123456\",\n        \"make\": \"Honda\",\n        \"vehicleModel\": \"Accord\",\n        \"year\": 2023,\n        \"type\": \"sedan\",\n        \"color\": \"Silver\",\n        \"fuelType\": \"petrol\",\n        \"engineCapacityCC\": 2000,\n        \"transmission\": \"automatic\",\n        \"status\": \"active\",\n        \"currentOdometerKm\": 0,\n        \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n        \"purchasePrice\": 25000,\n        \"insurance\": {\n            \"provider\": \"AllState\",\n            \"policyNumber\": \"POL123456\",\n            \"coverageType\": \"comprehensive\",\n            \"startDate\": \"2023-01-15T00:00:00.000Z\",\n            \"endDate\": \"2024-01-15T00:00:00.000Z\",\n            \"premium\": 1200\n        },\n        \"gpsDeviceId\": \"GPS123456\",\n        \"currentLocation\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n                -73.935242,\n                40.73061\n            ]\n        },\n        \"notes\": \"Company vehicle for sales team\",\n        \"createdAt\": \"2025-04-16T15:42:09.150Z\",\n        \"updatedAt\": \"2025-04-18T17:11:04.499Z\",\n        \"speedKm\": 4,\n        \"isIgnitionOn\": false,\n        \"maintenanceHistory\": [\n            {\n                \"_id\": \"680287a8751910e7d90fed4b\",\n                \"vehicleId\": \"67ffcfd150f65011cb32a3e4\",\n                \"date\": \"2024-08-15T10:00:00.000Z\",\n                \"type\": \"scheduled\",\n                \"description\": \"Scheduled 5000km oil change\",\n                \"cost\": 75.99,\n                \"odometerReadingKm\": 5120,\n                \"status\": \"pending\",\n                \"notes\": \"Customer requested synthetic oil.\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2025-04-18T17:11:04.489Z\",\n                \"updatedAt\": \"2025-04-18T17:11:04.489Z\",\n                \"__v\": 0\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"registrationNumber\": \"XYZ123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/vehicle/67ffcfd150f65011cb32a3e4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"67ffcfd150f65011cb32a3e4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"registrationNumber\": \"XYZ123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/vehicle/67ffcfd150f65011cb32a3e4",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicle",
+								"67ffcfd150f65011cb32a3e4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "876"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36c-dWCG0+LAsyApioiOMrnAcK9gCsw\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Apr 2025 18:16:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"67ffcfd150f65011cb32a3e4\",\n        \"registrationNumber\": \"XYZ123\",\n        \"vin\": \"1HGCM82633A123456\",\n        \"make\": \"Honda\",\n        \"vehicleModel\": \"Accord\",\n        \"year\": 2023,\n        \"type\": \"sedan\",\n        \"color\": \"Silver\",\n        \"fuelType\": \"petrol\",\n        \"engineCapacityCC\": 2000,\n        \"transmission\": \"automatic\",\n        \"status\": \"active\",\n        \"currentOdometerKm\": 0,\n        \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n        \"purchasePrice\": 25000,\n        \"insurance\": {\n            \"provider\": \"AllState\",\n            \"policyNumber\": \"POL123456\",\n            \"coverageType\": \"comprehensive\",\n            \"startDate\": \"2023-01-15T00:00:00.000Z\",\n            \"endDate\": \"2024-01-15T00:00:00.000Z\",\n            \"premium\": 1200\n        },\n        \"gpsDeviceId\": \"GPS123456\",\n        \"currentLocation\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n                -73.935242,\n                40.73061\n            ]\n        },\n        \"notes\": \"Company vehicle for sales team\",\n        \"createdAt\": \"2025-04-16T15:42:09.150Z\",\n        \"updatedAt\": \"2025-04-18T18:16:47.675Z\",\n        \"age\": 2,\n        \"speedKm\": 101,\n        \"isIgnitionOn\": true,\n        \"maintenanceHistory\": [\n            \"680287a8751910e7d90fed4b\",\n            \"68028c29751910e7d90fed55\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/vehicle/67ff50535e0fd5e45bef68d6",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"67ff50535e0fd5e45bef68d6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
