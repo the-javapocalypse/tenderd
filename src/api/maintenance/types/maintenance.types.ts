@@ -1,19 +1,16 @@
 import type { ObjectId } from "mongodb";
 import mongoose from "mongoose";
-import type { PaginateModel } from "mongoose";
+import type { PaginateModel, Document } from "mongoose";
 
 type MaintenanceType =
-  | "routine"
-  | "repair"
-  | "inspection"
-  | "emergency"
-  | "recall"
-  | "other";
-type MaintenanceStatus =
   | "scheduled"
-  | "in_progress"
-  | "completed"
-  | "cancelled";
+  | "unscheduled"
+  | "preventive"
+  | "corrective"
+  | "inspection"
+  | "other";
+
+type MaintenanceStatus = "pending" | "in_progress" | "completed" | "cancelled";
 
 // Replaced Part interface for maintenance
 interface ReplacedPart {
@@ -46,25 +43,44 @@ interface ServiceProvider {
 }
 
 // Maintenance Interface
-interface Maintenance {
-  _id?: string;
-  vehicle: string; // ID reference to Vehicle
+interface Maintenance extends Document {
+  _id: ObjectId;
+  vehicleId: ObjectId; // Reference to the Vehicle model
+  date: Date;
   type: MaintenanceType;
-  title: string;
-  description?: string;
-  performedDate: Date;
-  odometerReadingKm: number;
-  cost: MaintenanceCost;
-  provider?: ServiceProvider;
-  performedBy?: string;
+  description: string;
+  cost?: number;
+  odometerReadingKm?: number;
   status: MaintenanceStatus;
-  partsReplaced?: ReplacedPart[];
-  attachments?: Attachment[];
-  followUpNeeded: boolean;
-  followUpDate?: Date;
   notes?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  isDeleted: boolean;
+}
+
+interface MaintenanceCreatePayload {
+  vehicleId: string; // Keep as string for input, validation handles ObjectId check
+  date: Date;
+  type: MaintenanceType;
+  description: string;
+  cost?: number;
+  odometerReadingKm?: number;
+  status: MaintenanceStatus;
+  notes?: string;
+}
+
+interface MaintenanceResponse {
+  id: ObjectId;
+  vehicleId: ObjectId;
+  date: Date;
+  type: MaintenanceType;
+  description: string;
+  cost?: number;
+  odometerReadingKm?: number;
+  status: MaintenanceStatus;
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 type MaintenanceModelCollection = {} & mongoose.Model<Maintenance> &
@@ -79,4 +95,6 @@ export {
   Attachment,
   MaintenanceCost,
   ServiceProvider,
+  MaintenanceResponse,
+  MaintenanceCreatePayload,
 };

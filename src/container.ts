@@ -5,8 +5,10 @@ import ExceptionHandlerService from "./common/services/exception-handler.service
 import ValidationService from "./common/services/validation.service";
 import ApiResponseHandler from "./common/services/api-response.service";
 import VehicleService from "./api/vehicle/services/vehicle.service";
+import MaintenanceService from "./api/maintenance/services/maintenance.service";
 import RedisCacheService from "./common/services/redis-cache.service";
 import { VehicleModel } from "./api/vehicle/models/vehicle.model";
+import { MaintenanceModel } from "./api/maintenance/models/maintenance.model";
 import { SocketService } from "./common/services/socket.service";
 
 const createDatabase = async (dbConnString: string) => {
@@ -16,6 +18,7 @@ const createDatabase = async (dbConnString: string) => {
     database,
     model: {
       vehicle: VehicleModel,
+      maintenance: MaintenanceModel,
     },
   };
   return db;
@@ -39,6 +42,10 @@ const createContainer = async () => {
     db.model.vehicle,
     redisCacheService
   );
+  const maintenanceService = new MaintenanceService(
+    db.model.maintenance,
+    redisCacheService
+  );
 
   return {
     config,
@@ -48,6 +55,7 @@ const createContainer = async () => {
     db,
     redisCacheService,
     vehicleService,
+    maintenanceService,
   };
 };
 

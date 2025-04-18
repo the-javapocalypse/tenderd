@@ -1,125 +1,76 @@
-import mongoose, { Schema } from "mongoose";
-import {
+import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
+import type {
   Maintenance,
   MaintenanceModelCollection,
 } from "../types/maintenance.types";
-import mongoosePaginate from "mongoose-paginate-v2";
 
-const maintenanceSchema = new Schema(
+const maintenanceSchema = new mongoose.Schema<Maintenance>(
   {
-    vehicle: {
-      type: Schema.Types.ObjectId,
-      ref: "Vehicle",
+    vehicleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vehicle", // Reference to the Vehicle model
       required: true,
       index: true,
     },
-    type: {
-      type: String,
-      enum: ["routine", "repair", "inspection", "emergency", "recall", "other"],
+    date: {
+      type: Date,
       required: true,
     },
-    title: {
+    type: {
       type: String,
+      enum: [
+        "scheduled",
+        "unscheduled",
+        "preventive",
+        "corrective",
+        "inspection",
+        "other",
+      ],
       required: true,
-      trim: true,
     },
     description: {
       type: String,
-      trim: true,
-    },
-    performedDate: {
-      type: Date,
-      required: true,
-    },
-    odometerReadingKm: {
-      type: Number,
       required: true,
     },
     cost: {
-      parts: {
-        type: Number,
-        default: 0,
-      },
-      labor: {
-        type: Number,
-        default: 0,
-      },
-      tax: {
-        type: Number,
-        default: 0,
-      },
-      total: {
-        type: Number,
-        default: 0,
-      },
+      type: Number,
+      min: 0,
     },
-    provider: {
-      name: {
-        type: String,
-        trim: true,
-      },
-      contactInfo: {
-        type: String,
-        trim: true,
-      },
-      location: {
-        type: String,
-        trim: true,
-      },
-    },
-    performedBy: {
-      type: String,
-      trim: true,
+    odometerReadingKm: {
+      type: Number,
+      min: 0,
     },
     status: {
       type: String,
-      enum: ["scheduled", "in_progress", "completed", "cancelled"],
-      default: "completed",
-    },
-    partsReplaced: [
-      {
-        name: String,
-        partNumber: String,
-        quantity: Number,
-        cost: Number,
-      },
-    ],
-    attachments: [
-      {
-        name: String,
-        fileUrl: String,
-        fileType: String,
-      },
-    ],
-    followUpNeeded: {
-      type: Boolean,
-      default: false,
-    },
-    followUpDate: {
-      type: Date,
+      enum: ["pending", "in_progress", "completed", "cancelled"],
+      required: true,
+      default: "pending",
+      index: true,
     },
     notes: {
       type: String,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
-maintenanceSchema.pre("save", function (next) {
-  if (this.cost) {
-    this.cost.total = this.cost.parts + this.cost.labor + this.cost.tax;
-  }
-  next();
-});
-
-maintenanceSchema.index({ performedDate: -1 });
-maintenanceSchema.index({ status: 1 });
-
+// Add pagination plugin
 maintenanceSchema.plugin(mongoosePaginate);
 
-export const maintenanceModel: MaintenanceModelCollection = mongoose.model<
+// Add index for common query fields
+maintenanceSchema.index({ vehicleId: 1, date: -1 });
+
+export const MaintenanceModel = mongoose.model<
   Maintenance,
   MaintenanceModelCollection
 >("Maintenance", maintenanceSchema);
