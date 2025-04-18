@@ -10,7 +10,7 @@ export const createVehicleRouter = (container: Container) => {
   const router = Router();
 
   router.post("/", createCreateVehicleHandler(container));
-  router.post("/:id", createUpdateVehicleHandler(container));
+  router.put("/:id", createUpdateVehicleHandler(container));
 
   router.delete("/:id", createDeleteVehicleHandler(container));
 
