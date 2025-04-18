@@ -54,6 +54,7 @@ interface Vehicle extends Document {
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;
   notes?: string;
+  speed: number;
   createdAt?: Date;
   updatedAt?: Date;
   isDeleted: boolean;
@@ -85,6 +86,7 @@ interface VehicleResponse {
   gpsDeviceId?: string;
   currentLocation?: GeoPoint;
   notes?: string;
+  speed: number;
   createdAt?: Date;
   updatedAt?: Date;
 

@@ -1,6 +1,6 @@
-import { ExpressServer } from './common/services/express-server.service';
-import createContainer from './container';
-import * as Sentry from '@sentry/node';
+import { ExpressServer } from "./common/services/express-server.service";
+import createContainer from "./container";
+import * as Sentry from "@sentry/node";
 
 const start = async () => {
   // initialize container
@@ -16,8 +16,8 @@ const start = async () => {
   // create express server
   const expressServer = new ExpressServer(container);
   const app = expressServer.createExpressApp();
-}
+};
 
 start().catch((error) => {
-  console.error('App failed to start:', error);
+  console.error("App failed to start:", error);
 });

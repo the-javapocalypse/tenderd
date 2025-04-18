@@ -110,6 +110,10 @@ const vehicleSchema = new Schema(
     notes: {
       type: String,
     },
+    speed: {
+      type: Number,
+      default: 0,
+    },
     isDeleted: {
       type: Boolean,
       default: false,

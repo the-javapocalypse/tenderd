@@ -46,6 +46,7 @@ class VehicleService extends CrudService<Vehicle> {
       createdAt: document.createdAt,
       updatedAt: document.updatedAt,
       age: document.age,
+      speed: document.speed,
     };
   }
 }

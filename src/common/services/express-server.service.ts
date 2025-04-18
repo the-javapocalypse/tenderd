@@ -4,8 +4,8 @@ import type { Container } from "../../container";
 import { StatusCodes } from "http-status-codes";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { ApiError, ContextualError } from "./exception-handler.service";
 import { createAppRouter } from "../../api/index.route";
+import { SocketService } from "./socket.service";
 
 export class ExpressServer {
   private readonly container: Container;
@@ -51,9 +51,13 @@ export class ExpressServer {
     // Exception handling
     app.use(exceptionHandlerService.catchApiError());
 
-    app.listen(port, () => {
+    // Start the server
+    const server = app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
+
+    // Initialize Socket.IO service
+    const socketService = new SocketService(server, this.container);
 
     return app;
   }
