@@ -9,6 +9,9 @@
 2. Run `yarn dev`
 3. Make sure the env variables are correct
 
+## API Docs (Postman collection)
+Postman collection can be imported from docs folder
+
 ## Features
 1. Express app with DI principle and re-usable and flexbile services
 2. Connection with socket
